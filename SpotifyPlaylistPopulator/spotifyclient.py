@@ -21,12 +21,10 @@ class SpotifyClient:
         url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
         response = self._place_get_api_request(url)
         response_json = response.json()
-        try:
-            tracks = [Track(track["track"]["name"], track["track"]["id"], track["track"]["artists"][0]["name"]) for
-                      track in response_json["items"]]
-            return tracks
-        except KeyError:
-            return response_json
+        tracks = [Track(track["track"]["name"], track["track"]["id"], track["track"]["artists"][0]["name"]) for
+                  track in response_json["items"]]
+        return tracks
+
 
     def populate_playlist(self, playlist_id, tracks):
         """

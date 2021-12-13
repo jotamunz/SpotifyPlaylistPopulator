@@ -1,30 +1,35 @@
-import os
 import random
 
 from spotifyclient import SpotifyClient
+from jsonmanager import read_json
 
-from dotenv import load_dotenv
-load_dotenv()
 
-SIZE_LIMIT = 100
+def main():
+    config = read_json("settings.json")
+    spotify_client = SpotifyClient(config["auth_token"], config["user_id"])
+    for playlist in config["playlists"]:
+        populate_target_from_roster(spotify_client, playlist["subject_playlist_id"],
+                                    playlist["target_playlist_id"], playlist["size_limit"])
 
-def populate_target_from_roster():
-    spotify_client = SpotifyClient(os.getenv("AUTH_TOKEN"), os.getenv("USER_ID"))
 
-    response = spotify_client.clear_playlist(os.getenv("PLAYLIST_TARGET_1"))
-    print(response)
+def populate_target_from_roster(spotify_client, subject_playlist, target_playlist, size_limit):
 
-    tracks = spotify_client.get_playlist_tracks(os.getenv("PLAYLIST_ROSTER_1"))
+    # Get subject playlist tracks
+    tracks = spotify_client.get_playlist_tracks(subject_playlist)
 
+    # Shuffle and validate size
     random.shuffle(tracks)
+    if len(tracks) < size_limit:
+        size_limit = len(tracks)
 
-    size = SIZE_LIMIT
-    if len(tracks) < SIZE_LIMIT:
-        size = len(tracks)
+    # Clear target playlist
+    spotify_client.clear_playlist(target_playlist)
 
-    response = spotify_client.populate_playlist(os.getenv("PLAYLIST_TARGET_1"), tracks[:size])
-    print(response)
+    # Populate target playlist
+    spotify_client.populate_playlist(target_playlist, tracks[:size_limit])
+
 
 if __name__ == '__main__':
-    populate_target_from_roster()
+    main()
+
 
