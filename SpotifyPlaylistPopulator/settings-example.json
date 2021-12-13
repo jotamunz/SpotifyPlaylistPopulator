@@ -1,0 +1,12 @@
+{
+  "auth_token": "ReplaceThis",
+  "user_id": "ReplaceThis",
+  "playlists":
+          [
+            {
+              "subject_playlist_id": "ReplaceThis",
+              "target_playlist_id": "ReplaceThis",
+              "size_limit": 200
+            }
+          ]
+}
