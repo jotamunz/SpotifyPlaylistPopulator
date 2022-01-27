@@ -1,5 +1,6 @@
 {
-  "auth_token": "ReplaceThis",
+  "refresh_token": "ReplaceThis",
+  "credentials_base_64": "ReplaceThis",
   "user_id": "ReplaceThis",
   "playlists":
           [

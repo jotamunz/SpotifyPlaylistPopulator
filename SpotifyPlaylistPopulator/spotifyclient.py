@@ -3,6 +3,7 @@ import requests
 
 from track import Track
 
+
 class SpotifyClient:
 
     def __init__(self, authorization_token, user_id):
@@ -24,7 +25,6 @@ class SpotifyClient:
         tracks = [Track(track["track"]["name"], track["track"]["id"], track["track"]["artists"][0]["name"]) for
                   track in response_json["items"]]
         return tracks
-
 
     def populate_playlist(self, playlist_id, tracks):
         """
