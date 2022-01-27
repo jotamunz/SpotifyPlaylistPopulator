@@ -9,7 +9,7 @@ Install the necessary Python packages by running:
 ## Configure
 This application uses the OAuth 2.0 authorization framework
 
-### Step 1. Register your app in [Spotify for Developers](https://developer.spotify.com/dashboard)
+#### Step 1. Register your app in [Spotify for Developers](https://developer.spotify.com/dashboard)
 
 **Note:** save your client_id and client_secret
 
