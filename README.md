@@ -11,7 +11,7 @@ This application uses the OAuth 2.0 authorization framework
 
 Step 1. Register your app in [Spotify for Developers](https://developer.spotify.com/dashboard)
 
-*Note:* save your client_id and client_secret
+**Note:** save your client_id and client_secret
 
 Step 2. Set a redirect uri (it doesn't have to be a valid uri)
 
@@ -23,7 +23,7 @@ Directly replace the following params
 YOUR_ID: Your given client id
 YOUR_URI: [URL-encoded](https://www.urlencoder.org) exact match of app redirect uri
 
-*Note:* save the code returned in the url
+**Note:** save the code returned in the url
 
 Step 4. Obtain refresh token by running the following curl command in cmd
 
@@ -34,7 +34,7 @@ YOUR_CREDENTIALS: [Base64-encoded](https://www.base64encode.org) result of `clie
 YOUR_CODE: Code obtained in previous step
 YOUR_URI: Same as before
 
-*Note:* save the refresh token from the response json
+**Note:** save the refresh token from the response json
 
 Step 5. Modify the parameters in "SpotifyPlaylistPopulator/settings-example.json"
 
