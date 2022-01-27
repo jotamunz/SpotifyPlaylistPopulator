@@ -19,7 +19,7 @@ This application uses the OAuth 2.0 authorization framework
 
 `https://accounts.spotify.com/authorize?client_id=YOUR_ID&response_type=code&redirect_uri=YOUR_URI&scope=playlist-modify-public%20playlist-modify-private%20playlist-read-public%20playlist-read-private%20playlist-read-collaborative`
 
-Directly replace the following params  
+Directly replace the following params:  
 YOUR_ID: Your given client id  
 YOUR_URI: [URL-encoded](https://www.urlencoder.org) exact match of app redirect uri
 
@@ -29,7 +29,7 @@ YOUR_URI: [URL-encoded](https://www.urlencoder.org) exact match of app redirect 
 
 `curl -H "Authorization: Basic YOUR_CREDENTIALS" -d grant_type=authorization_code -d code=YOUR_CODE -d redirect_uri=YOUR_URI https://accounts.spotify.com/api/token --ssl-no-revoke`
 
-Directly replace the following params  
+Directly replace the following params:  
 YOUR_CREDENTIALS: [Base64-encoded](https://www.base64encode.org) result of `client_id:client_secret`  
 YOUR_CODE: Code obtained in previous step  
 YOUR_URI: Same as before
@@ -38,11 +38,13 @@ YOUR_URI: Same as before
 
 ### Step 5. Modify the parameters in "SpotifyPlaylistPopulator/settings-example.json"
 
-Use the obtained refresh token and Base64-encoded credentials. The user and playlist ids can be obtained from their corresponding urls or with the [console](https://developer.spotify.com/console).
+Use the obtained refresh token and Base64-encoded credentials.  
+The user and playlist ids can be obtained from their corresponding urls or with the [console](https://developer.spotify.com/console).
 
 ### Step 6. Rename the file to "settings.json"
 
-The application can now be run any time without reauthorizing or any user input. If you need any help refer to [this tutorial](https://www.youtube.com/watch?v=-FsFT6OwE1A)
+The application can now be run any time without reauthorizing or any user input.  
+If you need any help refer to [this tutorial](https://www.youtube.com/watch?v=-FsFT6OwE1A).
 
 ## Run
 Run the entry-point script:
