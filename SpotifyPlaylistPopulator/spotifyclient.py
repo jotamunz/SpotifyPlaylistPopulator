@@ -24,37 +24,56 @@ class SpotifyClient:
         response_json = response.json()
         tracks = [Track(track["track"]["name"], track["track"]["id"], track["track"]["artists"][0]["name"]) for
                   track in response_json["items"]]
+        offset = 100
+        while tracks and len(tracks) == offset:
+            params = {"offset": offset}
+            response = self._place_get_api_request(url, params)
+            response_json = response.json()
+            tracks += [Track(track["track"]["name"], track["track"]["id"], track["track"]["artists"][0]["name"]) for
+                       track in response_json["items"]]
+            offset += 100
         return tracks
 
     def populate_playlist(self, playlist_id, tracks):
         """
         :param playlist_id: (str) Spotify playlist id
         :param tracks: ([Track]) List of tracks to add
-        :return response: API response
+        :return
         """
         track_uris = [track.create_spotify_uri() for track in tracks]
-        data = json.dumps(track_uris)
         url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
-        response = self._place_post_api_request(url, data)
-        response_json = response.json()
-        return response_json
+        batches = len(track_uris) // 100
+        for i in range(batches):
+            data = json.dumps(track_uris[:100])
+            self._place_post_api_request(url, data)
+            track_uris = track_uris[100:]
+        if track_uris:
+            data = json.dumps(track_uris)
+            self._place_post_api_request(url, data)
+        return
 
     def clear_playlist(self, playlist_id):
         """
         :param playlist_id: (str) Spotify playlist id
-        :return response: API response
+        :return
         """
         tracks = self.get_playlist_tracks(playlist_id)
         track_uris = [track.create_spotify_uri_json() for track in tracks]
-        data = json.dumps({"tracks": track_uris})
         url = f"https://api.spotify.com/v1/playlists/{playlist_id}/tracks"
-        response = self._place_del_api_request(url, data)
-        response_json = response.json()
-        return response_json
+        batches = len(track_uris) // 100
+        for i in range(batches):
+            data = json.dumps({"tracks": track_uris[:100]})
+            self._place_del_api_request(url, data)
+            track_uris = track_uris[100:]
+        if track_uris:
+            data = json.dumps({"tracks": track_uris})
+            self._place_del_api_request(url, data)
+        return
 
-    def _place_get_api_request(self, url):
+    def _place_get_api_request(self, url, params=None):
         response = requests.get(
             url,
+            params=params,
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self._authorization_token}"
