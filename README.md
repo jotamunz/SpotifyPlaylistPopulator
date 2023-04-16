@@ -1,12 +1,16 @@
 # Spotify Playlist Populator
-A Python application to populate a Spotify playlist with tracks from another Spotify playlist using the Spotify Web API
+
+A Python application to populate a Spotify playlist with tracks from another Spotify playlist using the Spotify Web API.  
+The playlists I maintain with this app are: [log cabin cafe](https://open.spotify.com/playlist/07G5QhRoBXDsoRTNE4Ljcp?si=825af534b27f480c) & [mt. fuji](https://open.spotify.com/playlist/3IUlexve6UjaelN6wUDvap?si=b43e5e2035144b16)
 
 ## Install
+
 Install the necessary Python packages by running:
 
 `$ pip install -r requirements.txt`
 
 ## Configure
+
 This application uses the OAuth 2.0 authorization framework
 
 ### Step 1. Register your app in [Spotify for Developers](https://developer.spotify.com/dashboard)
@@ -47,10 +51,7 @@ The application can now be run any time without reauthorizing or any user input.
 If you need any help refer to [this tutorial](https://www.youtube.com/watch?v=-FsFT6OwE1A).
 
 ## Run
+
 Run the entry-point script:
 
 `$ python main.py`
-
-
-
-
